@@ -18,10 +18,14 @@
 								<div class="alert alert-danger">{{ $errors->first() }}</div>
 							@endif
 
+							@if (session()->has('verified'))
+								<div class="alert alert-success">Account verified successfully.</div>
+							@endif
+
 							<div class="row">
 								<div class="col-sm-12 align-items-end">
 									<div class="form-group">
-										<label htmlFor="#">Email</label>
+										<label for="#">Email</label>
 										<div class="form-field">
 											<div class="icon"><span class="icon-envelope"></span></div>
 											<input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}" />
@@ -30,7 +34,7 @@
 								</div>
 								<div class="col-sm-12 align-items-end">
 									<div class="form-group">
-										<label htmlFor="#">Password</label>
+										<label for="#">Password</label>
 										<div class="form-field">
 											<div class="icon"><span class="icon-asterisk"></span></div>
 											<input type="password" name="password" class="form-control" placeholder="Password" />

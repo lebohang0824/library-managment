@@ -97099,7 +97099,26 @@ function (_React$Component) {
     key: "onsubmit",
     value: function onsubmit(e) {
       e.preventDefault();
-      alert('Submitted');
+      axios.post('/books/return', new FormData(e.target)).then(function (res) {
+        Swal.fire({
+          title: res.data.success ? 'Success' : 'Error!',
+          text: res.data.message,
+          icon: res.data.success ? 'success' : 'error',
+          confirmButtonText: 'Okay'
+        });
+      })["catch"](function (err) {
+        // Get errors
+        var errors = err.response.data.errors;
+
+        if (!_.isEmpty(errors)) {
+          Swal.fire({
+            title: 'Error!',
+            text: _.values(errors)[0][0],
+            icon: 'error',
+            confirmButtonText: 'Okay'
+          });
+        }
+      });
     }
   }, {
     key: "render",
@@ -97125,6 +97144,7 @@ function (_React$Component) {
         className: "icon-barcode"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(cleave_js_react__WEBPACK_IMPORTED_MODULE_2___default.a, {
         className: "form-control",
+        name: "isbn",
         options: {
           blocks: [3, 1, 5, 3, 1],
           delimiter: '-'
@@ -97143,8 +97163,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "icon-star"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        name: "",
-        id: "",
+        name: "rate",
         className: "form-control"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "1"
@@ -97170,6 +97189,7 @@ function (_React$Component) {
         className: "icon-comment"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
+        name: "comment",
         className: "form-control",
         placeholder: "Comment"
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -97187,8 +97207,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "ion-ios-checkbox"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        name: "",
-        id: "",
+        name: "feedback",
         className: "form-control"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: ""
@@ -97272,9 +97291,9 @@ function (_React$Component) {
         className: "text"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "mb-1"
-      }, "Far far away, behind the word mountains, far from..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, this.props.comment.body), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "name"
-      }, "Mark Web"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }, this.props.comment.user.surname, " ", this.props.comment.user.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "position"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "icon icon-calendar"

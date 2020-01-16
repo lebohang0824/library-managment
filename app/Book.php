@@ -23,13 +23,6 @@ class Book extends Model
 
     // Comments relationship
     public function comments() {
-        $comments = [];
-        $len = rand(0, 3);
-        
-        for ($i = 0; $i < $len; $i++) {
-            $comments[$i] = $i;
-        }
-
-    	return $comments;
+        return $this->hasMany('App\Comment');
     }
 }

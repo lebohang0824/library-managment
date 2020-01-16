@@ -6,11 +6,13 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use Illuminate\Support\Str;
+use App\Mail\UserRegistered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
-    //
+    // $user->sendEmailVerificationNotification();
 
     public function __construct() {
         $this->middleware('guest', ['except' => ['postLogout']]);
@@ -33,10 +35,13 @@ class AuthController extends Controller
             ]);
         }
 
-    	User::create($request->all());
+        // Save on database
+    	$user = User::create($request->all());
+
+        // Send verification email
+        $user->sendEmailVerificationNotification();
 
     	return back()->with('success', 'Thank you for your registration!');
-
     }
 
     public function postLogin(Request $request) {
@@ -59,10 +64,10 @@ class AuthController extends Controller
     	return back()->withInput()->withErrors([
             'errors' => ['Wrong account email or password!']
         ]);
-
     }
 
     public function postLogout() {
     	return Auth::logout();
     }
+
 }

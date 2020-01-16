@@ -16,7 +16,10 @@ class CommentsController extends Controller
     	// Book not found
     	if (!$book->exists()) return response('Book not found', 404);
     	
+        // Comments
+    	$comments = $book->first()->comments()->with('user')->orderBy('id', 'desc')->take(3)->get();
+
     	// Book comments
-    	return response($book->first()->comments());
+    	return response($comments);
     }
 }

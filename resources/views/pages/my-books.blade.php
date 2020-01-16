@@ -50,7 +50,7 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="row pt-2" style="background-color: #f1f1f1;">
-								<h4 class="col-sm-12 mb-3 py-3 bg-dark text-light">Taked Books</h4>
+								<h4 class="col-sm-12 mb-3 py-3 bg-dark text-light">Books Taken</h4>
 								<p class="{{ $borrowedBooks->count() > 0 ? 'd-none' : '' }} p-3">You have no borrowed books.</p>
 								@foreach($borrowedBooks as $borrow)					
 									<div class="col-sm-4 ftco-animate">

@@ -9,6 +9,7 @@ $black: #000000;
 // $darken: #3a4348;
 
 $primary: #f29202;
+$danger: #fd474a;
 $secondary: #2f89fc;
 $tertiary: #08c299;
 
@@ -831,7 +832,7 @@ h1, h2, h3, h4, h5,
 			}
 			.not-available{
 				font-weight: 400;
-				color: $warning;
+				color: $danger;
 			}
 			.book{
 				font-size: 20px;

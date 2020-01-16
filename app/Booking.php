@@ -32,8 +32,7 @@ class Booking extends Model
     }
 
     // User relationship
-    public function user()
-    {
+    public function user() {
         return $this->belongsTo('App\User');
     }
 }

@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Book;
 use App\Booking;
+use App\Comment;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
 {
-
     public function getBook($ref) {
         return view('pages.book', ['book' => Book::whereRef($ref)->first()]);
     }
@@ -102,18 +102,6 @@ class BooksController extends Controller
         ]);
     }
 
-    public function getBookComments($ref) {
-
-    	// Find book
-    	$book = Book::whereRef($ref);
-
-    	// Book not found
-    	if (!$book->exists()) return response('Book not found', 404);
-    	
-    	// Book comments
-    	return response($book->first()->comments());
-    }
-
     public function postRegisterBook(Request $request) {
        
         $request->validate([
@@ -172,5 +160,65 @@ class BooksController extends Controller
             'message' => 'Book added successfully.',
             'data' => $book
         ]);
-}
+    }
+
+    public function postReturnBook(Request $request) {
+
+        $request->validate([
+            'isbn' => 'required|min:10',
+            'rate' => 'required',
+        ]);
+
+        if (!Auth::check()) {
+            return response([
+                'success' => false,
+                'message' => 'You need to be logged in.',
+                'data' => []
+            ]);
+        }
+        
+        $book = Book::whereIsbn(str_replace('-', '', $request->isbn));        
+
+        if ($book->exists()) {
+            
+            $bookedBook = $book->first()->bookings()->whereUserId(Auth::id());
+
+            if ($bookedBook->exists()) {
+                // Delete booking
+                $bookedBook->delete();
+
+                // Update book
+                $book->first()->update(['booked' => false]);
+
+                // Comments
+                if (!empty($request->comment)) {
+                    $book->first()->comments()->create([
+                        'user_id' => Auth::id(),
+                        'body' => $request->comment,
+                    ]);
+                }
+
+                // Rating
+
+                return response([
+                    'success' => true,
+                    'message' => 'Thank you for your submission.',
+                    'data' => $book->first()
+                ]); 
+            }
+
+            return response([
+                'success' => false,
+                'message' => 'Book not available.',
+                'data' => $book->first()
+            ]);  
+        }
+
+        return response([
+            'success' => false,
+            'message' => 'Book not available.',
+            'data' => $book->first()
+        ]);        
+    }
+
 }

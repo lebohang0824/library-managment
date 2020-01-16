@@ -14,7 +14,28 @@ class ReturnBook extends React.Component{
     onsubmit(e) {
         e.preventDefault();
 
-        alert('Submitted');
+        axios.post('/books/return', new FormData(e.target)).then(res => {
+            Swal.fire({
+                title: res.data.success ? 'Success' : 'Error!',
+                text: res.data.message,
+                icon: res.data.success ? 'success' : 'error',
+                confirmButtonText: 'Okay'
+            })
+                    
+        }).catch(err => {
+            // Get errors
+            let errors = err.response.data.errors;
+
+            if (!_.isEmpty(errors)) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: _.values(errors)[0][0],
+                    icon: 'error',
+                    confirmButtonText: 'Okay'
+                });
+            }
+
+        });
     }
 
     render() {
@@ -27,7 +48,7 @@ class ReturnBook extends React.Component{
 								<label htmlFor="#">ISBN</label>
 								<div className="form-field">
 									<div className="icon"><span className="icon-barcode"></span></div>
-                                    <Cleave className="form-control" options={{ blocks: [3, 1, 5, 3, 1], delimiter: '-' }} placeholder="ISBN" />
+                                    <Cleave className="form-control" name="isbn" options={{ blocks: [3, 1, 5, 3, 1], delimiter: '-' }} placeholder="ISBN" />
 								</div>
 							</div>
 						</div>
@@ -36,7 +57,7 @@ class ReturnBook extends React.Component{
 								<label htmlFor="#">Rate</label>
 								<div className="form-field">
 									<div className="icon"><span className="icon-star"></span></div>
-										<select name="" id="" className="form-control">
+										<select name="rate" className="form-control">
 											<option value="1">1 Star</option>
 											<option value="2">2 Stars</option>
 											<option value="3">3 Stars</option>
@@ -51,7 +72,7 @@ class ReturnBook extends React.Component{
 								<label htmlFor="#">Comment</label>
 								<div className="form-field">
 									<div className="icon"><span className="icon-comment"></span></div>
-									<input type="text" className="form-control" placeholder="Comment" />
+									<input type="text" name="comment" className="form-control" placeholder="Comment" />
 								</div>
 							</div>
 						</div>
@@ -61,7 +82,7 @@ class ReturnBook extends React.Component{
 								<div className="form-field">
 									<div className="select-wrap">
 										<div className="icon"><span className="ion-ios-checkbox"></span></div>
-										<select name="" id="" className="form-control">
+										<select name="feedback" className="form-control">
 											<option value="">Yes</option>
 											<option value="">No</option>
 										</select>

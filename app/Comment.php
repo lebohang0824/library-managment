@@ -13,6 +13,17 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
-        'book_id', 'body',
+        'book_id', 'user_id', 'body',
     ];
+
+
+    // Book relationship
+    public function book() {
+    	return $this->belongsTo('App\Book');
+    }
+
+    // User relationship
+    public function user() {
+    	return $this->belongsTo('App\User');
+    }
 }
