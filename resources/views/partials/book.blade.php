@@ -100,7 +100,7 @@
 							</div>
 							@endif
 						@else
-							<h3 class="heading mb-4">Borrow book</h3>
+							<h3 class="heading mb-4">Take &amp; Return form</h3>
 							<div id="borrow-book-expanded"></div>
 						@endif
 					</div>

@@ -8,7 +8,7 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="row" style="background-color: #f9f9f9;">
-								<h4 class="col-sm-12 py-3 mb-3 bg-dark text-light">Booked Books</h3>
+								<h4 class="col-sm-12 py-3 mb-3 bg-dark text-light">My Reserved Books</h3>
 								<p class="{{ $bookedBooks->count() > 0 ? 'd-none' : '' }} p-3">You have no booked books.</p>
 								@foreach($bookedBooks as $booked)					
 									<div class="col-sm-4 ftco-animate mb-3">
@@ -39,7 +39,10 @@
 													<div class="two"></div>
 												</div>
 												<p>{{ $booked->book->title }}</p>
-												<a href="#" onclick="pop()" class="btn btn-primary btn-block btn-sm">Confirm</a>
+												<div class="row">
+												<a href="#" onclick="pop()" class="btn btn-primary col-5 mx-1 btn-sm">Confirm</a>
+												<a href="#" onclick="cancel()" class="btn btn-outline-primary col-5 mx-1 btn-sm">Cancel</a>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -91,7 +94,7 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="row pt-2" style="background-color: #d9d9d9;">
-								<h4 class="col-sm-12 mb-3 py-3 bg-dark text-light">My Added Books</h4>
+								<h4 class="col-sm-12 mb-3 py-3 bg-dark text-light">My Contribution</h4>
 								<p class="{{ $myAddedBooks->count() > 0 ? 'd-none' : '' }} p-3">You have added books.</p>
 								<div class="table-responsive p-2">
 									<table class="table table-sm table-striped table-bordered">
@@ -150,6 +153,31 @@
 			},
 			showCancelButton: true,
 			confirmButtonText: 'Confirm',
+			showLoaderOnConfirm: true,
+			preConfirm: (val) => {
+		    return axios.get()
+		    	.then(res => {
+
+		    	}).catch(err => {
+		        	Swal.showValidationMessage(
+		          		`Request failed: ${err}`
+		        	);
+		      	});
+		  	},
+		  	allowOutsideClick: () => !Swal.isLoading()
+			}).then((result) => {
+			  	if (result.value) {
+			  		// Reload page
+			  	}
+			});
+	}
+
+	function cancel() {
+		Swal.fire({
+			title: 'Are you sure you want to cancel?',
+			showCancelButton: true,
+			cancelButtonText: 'No',
+			confirmButtonText: 'Yes',
 			showLoaderOnConfirm: true,
 			preConfirm: (val) => {
 		    return axios.get()

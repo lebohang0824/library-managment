@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Image;
 use App\Book;
 use App\Booking;
 use App\Comment;
@@ -12,6 +13,11 @@ use Illuminate\Http\Request;
 
 class BooksController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth', ['only' => ['getMyBooks', 'postRegisterBook']]);
+    }
+
     public function getBook($ref) {
         return view('pages.book', ['book' => Book::whereRef($ref)->first()]);
     }
@@ -108,7 +114,8 @@ class BooksController extends Controller
             'isbn'       => 'required|min:10',
             'title'      => 'required|min:2',
             'author'     => 'required|min:2',
-            'cover'      => 'required'
+            'cover'      => 'required',
+            'terms'      => 'required',
         ]);
 
         // 
@@ -138,11 +145,15 @@ class BooksController extends Controller
         $image = '/images/uploads/'. $filename;
         $stars = 1;
         $booked = false;
-        $category = 'Default';
+        $category = $request->category;
 
         // Upload
         $file->move($destination, $filename);
 
+        // Resize
+        Image::make('images/uploads/'. $filename)->resize(700, 550)->save('images/uploads/'. $filename);
+
+        // Save to database
         $book = Book::create([
             'user_id' => Auth::id(),
             'ref' => $ref,
@@ -155,6 +166,7 @@ class BooksController extends Controller
             'isbn' => $isbn
         ]);
 
+        // Response
         return response([
             'success' => true,
             'message' => 'Book added successfully.',

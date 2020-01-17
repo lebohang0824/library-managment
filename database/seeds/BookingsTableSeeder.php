@@ -3,6 +3,7 @@
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class BookingsTableSeeder extends Seeder
 {
@@ -13,12 +14,14 @@ class BookingsTableSeeder extends Seeder
      */
     public function run()
     {
-    	DB::table('bookings')->insert([
-        	'user_id' => 1,
-            'book_id' => 3,
-            'from' => today(),
-            'till' => now()->addWeek('1'),
-            'availability' => true
+    	DB::table('users')->insert([
+            'name'       => 'Umuzi',
+            'surname'    => 'Organisation',
+            'cohort'     => 'c-0',
+            'department' => 'Management',
+            'email'      => 'umuzi@umuzi.org',
+            'email_verified_at' => now(),
+            'password'   => Hash::make('321321321'),
         ]);
     }
 }

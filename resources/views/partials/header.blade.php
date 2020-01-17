@@ -7,7 +7,7 @@
 					<h1 class="mb-4" data-scrollax="properties: { translateY: '10%' }">
 						<b>Umuzi</b> <br>Book Hub</h1>
 					<p data-scrollax="properties: { translateY: '10%' }" style="color: #333">
-						Find your favourite book and everyday.
+						when in doubt go to the library - J.K Rowling.
 					</p>
 				</div>
 			</div>

@@ -20,7 +20,11 @@ class RegisterBook extends React.Component{
                 text: res.data.message,
                 icon: res.data.success ? 'success' : 'error',
                 confirmButtonText: 'Okay'
-            })
+            }).then(isConfirm => {
+                if (isConfirm) {
+                    if (res.data.success) window.location = window.location.href;
+                }
+            });
                     
         }).catch(err => {
             // Get errors
@@ -74,6 +78,24 @@ class RegisterBook extends React.Component{
                         </div>
                         <div className="col-sm-12 align-items-end">
                             <div className="form-group">
+                                <label htmlFor="#">Category</label>
+                                <div className="form-field">
+                                    <div className="select-wrap">
+                                        <div className="icon"><span className="ion-ios-checkbox"></span></div>
+                                        <select name="category" className="form-control">
+                                            <option>General</option>
+                                            <option>Programming</option>
+                                            <option>Business</option>
+                                            <option>Design</option>
+                                            <option>Fictions</option>
+                                            <option>Poetry</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-sm-12 align-items-end">
+                            <div className="form-group">
                                 <label htmlFor="#">Cover</label>
                                 <div className="form-field">
                                     <div className="icon"><span className="ion-ios-journal"></span></div>
@@ -86,7 +108,7 @@ class RegisterBook extends React.Component{
                                 <div className="form-field">
                                     <span>
                                         <input type="checkbox" name="terms" className="form-checkbox" placeholder="Terms &amp; Conditions" />
-                                        Terms &amp; Conditions
+                                        &nbsp; I accept <a href="#">Terms &amp; Conditions</a>
                                     </span>
                                 </div>
                             </div>

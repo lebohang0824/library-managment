@@ -96739,6 +96739,10 @@ function (_React$Component) {
           text: res.data.message,
           icon: res.data.success ? 'success' : 'error',
           confirmButtonText: 'Okay'
+        }).then(function (isConfirm) {
+          if (isConfirm) {
+            if (res.data.success) window.location = window.location.href;
+          }
         });
       })["catch"](function (err) {
         // Get errors
@@ -96824,6 +96828,23 @@ function (_React$Component) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "#"
+      }, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-field"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "select-wrap"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "ion-ios-checkbox"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        name: "category",
+        className: "form-control"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "General"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Programming"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Business"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Design"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Fictions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Poetry")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-12 align-items-end"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "#"
       }, "Cover"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-field"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -96846,7 +96867,9 @@ function (_React$Component) {
         name: "terms",
         className: "form-checkbox",
         placeholder: "Terms & Conditions"
-      }), "Terms & Conditions")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), "\xA0 I accept ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }, "Terms & Conditions"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-sm-12 align-self-end"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
@@ -97496,7 +97519,7 @@ function (_React$Component) {
         className: "ml-auto"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: 'books/' + this.props.book.ref
-      }, this.props.book.booked == 1 && 'Details' || 'Borrow'))))));
+      }, this.props.book.booked == 1 && 'Details' || 'Take & Return'))))));
     }
   }]);
 

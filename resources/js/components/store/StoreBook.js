@@ -46,7 +46,7 @@ class StoreBook extends React.Component {
                             <span><i className="icon-folder-o"></i> { this.props.book.category }</span> 
                             <span className="ml-auto">
                             	<a href={ 'books/' + this.props.book.ref  }>
-                            		{ this.props.book.booked == 1 && 'Details' || 'Borrow' }
+                            		{ this.props.book.booked == 1 && 'Details' || 'Take & Return' }
                             	</a>
                             </span>
                         </p>
