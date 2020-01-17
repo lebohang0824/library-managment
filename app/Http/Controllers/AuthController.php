@@ -70,8 +70,4 @@ class AuthController extends Controller
     	return Auth::logout();
     }
 
-    public function mail() {
-        User::find(2)->sendEmailVerificationNotification();
-    }
-
 }

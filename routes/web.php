@@ -48,6 +48,3 @@ Route::view('/contact', 'pages.contact');
 
 // Logout
 Route::post('/logout', 'AuthController@postLogout');
-
-
-Route::get('mail', 'AuthController@mail');
