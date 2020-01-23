@@ -151,7 +151,7 @@ class BooksController extends Controller
         $file->move($destination, $filename);
 
         // Resize
-        // Image::make('images/uploads/'. $filename)->resize(700, 550)->save('images/uploads/'. $filename);
+        Image::make('images/uploads/'. $filename)->resize(700, 550)->save('images/uploads/'. $filename);
 
         // Save to database
         $book = Book::create([

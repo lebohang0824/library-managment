@@ -32,6 +32,7 @@
 									<div class="two"></div>
 								</div>
 								<p>{{ $book->title }}</p><hr />
+								<p><b>ISBN:</b> {{ $book->isbn }}</p><hr />
 								<p class="bottom-area d-flex">
 									<span><i class="icon-folder-o"></i> {{ $book->category }}</span> 
 									<span class="ml-auto">

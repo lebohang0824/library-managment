@@ -6,14 +6,14 @@
 			<div class="container">
 				<div class="row d-flex pt-4 justify-content-center">
 					<div class="col-md-7 text-center heading-section heading-section-white ftco-animate fadeInUp ftco-animated">
-						<h2>Subcribe to our Newsletter</h2>
-						<p>Get the latest updates on your favourite books.</p>
+						<h2>Books Donations.</h2>
+						<p>Your contribution is highly appreciated.</p>
 						<div class="row d-flex justify-content-center mt-5">
 							<div class="col-md-8">
 								<form action="#" class="subscribe-form">
 									<div class="form-group d-flex">
 										<input type="text" class="form-control" placeholder="Enter email address">
-										<input type="submit" value="Subscribe" class="submit px-3">
+										<input type="submit" value="Submit" class="submit px-3">
 									</div>
 								</form>
 							</div>
